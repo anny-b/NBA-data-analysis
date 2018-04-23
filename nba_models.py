@@ -31,7 +31,7 @@ def plot_allpos_metric(df,met,metname):
 
 def plot_metric(df, met, win, metname):
     dfm=df[met].rolling(window=win).mean()
-    plt.plot(df[['Year']],df[[met]],color='b')
+    plt.plot(df[['Year']],df[[met]],color='c')
     plt.plot(df[['Year']],dfm,color='r')
     plt.xlabel('Year')
     plt.ylabel(met)

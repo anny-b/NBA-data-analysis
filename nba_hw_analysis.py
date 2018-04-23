@@ -42,6 +42,24 @@ def hw_plot(df, pl, year, n):
     plt.legend(handles=[red_dot,blue_dot,green_dot,magenta_dot,yellow_dot], loc=2)
     plt.show()
 
+def hw_bin_plot(df, met):
+    fig, axes = plt.subplots(2, 2, subplot_kw=dict(), figsize=(8,6))
+    fig.set_figheight(5.5)
+    axs = [axes[0,0], axes[0,1], axes[1,0], axes[1,1]]
+    #plt.suptitle('Histogram of %s for different positions'%met)
+    for pos in zip(['PG','SG','SF','C'],axs):
+        pos[1].hist(df[met][df.Pos==pos[0]],25)
+        mean = round(df[met][df.Pos==pos[0]].mean(),1)
+        sd = round(df[met][df.Pos==pos[0]].std(),1)
+        pos[1].set_title('Position=%s, mean=%s, sd=%s'%(pos[0],mean,sd))
+    plt.tight_layout()
+    plt.subplots_adjust(left=0.2, bottom=0.2)
+    fig.text(
+        0.5, 0.05,
+        "Histogram of %s for different positions"%met,
+        ha='center',size=15)
+    plt.show()
+
 def top_3p_players(df,pl,year,n):
     df1=df[['Player','Age', 'Tm', 'G']]
     df2=df[df['Year']==year][['Player', 'PTS', 'Tm', 'Pos', 'G','3P','3P%','Year']]
